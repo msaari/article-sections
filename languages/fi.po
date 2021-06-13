@@ -1,0 +1,124 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2021-06-13 08:48+0300\n"
+"PO-Revision-Date: 2021-06-13 08:50+0300\n"
+"Last-Translator: Mikko Saari <mikko@mikkosaari.fi>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: article-sections.php:38
+msgid "Article Sections"
+msgstr "Osiot"
+
+#: article-sections.php:39 article-sections.php:65
+msgid "Section"
+msgstr "Osio"
+
+#: article-sections.php:40
+msgid "Section Archives"
+msgstr "Osioarkistot"
+
+#: article-sections.php:41
+msgid "Section Attributes"
+msgstr "Osion ominaisuudet"
+
+#: article-sections.php:42
+msgid "Parent Section:"
+msgstr "Ylempi osio:"
+
+#: article-sections.php:43
+msgid "All Sections"
+msgstr "Kaikki osiot"
+
+#: article-sections.php:44
+msgid "Add New Section"
+msgstr "Lisää uusi osio"
+
+#: article-sections.php:45
+msgid "Add New"
+msgstr "Lisää uusi"
+
+#: article-sections.php:46
+msgid "New Section"
+msgstr "Uusi osio"
+
+#: article-sections.php:47
+msgid "Edit Section"
+msgstr "Muokkaa osiota"
+
+#: article-sections.php:48
+msgid "Update Section"
+msgstr "Päivitä osio"
+
+#: article-sections.php:49
+msgid "View Section"
+msgstr "Katso osiota"
+
+#: article-sections.php:50
+msgid "View Sections"
+msgstr "Katso osioita"
+
+#: article-sections.php:51
+msgid "Search Section"
+msgstr "Hae osioita"
+
+#: article-sections.php:52
+msgid "Not found"
+msgstr "Ei löytynyt"
+
+#: article-sections.php:53
+msgid "Not found in Trash"
+msgstr "Ei löytynyt roskista"
+
+#: article-sections.php:54
+msgid "Featured Image"
+msgstr "Artikkelikuva"
+
+#: article-sections.php:55
+msgid "Set featured image"
+msgstr "Aseta artikkelikuva"
+
+#: article-sections.php:56
+msgid "Remove featured image"
+msgstr "Poista artikkelikuva"
+
+#: article-sections.php:57
+msgid "Use as featured image"
+msgstr "Käytä artikkelikuvana"
+
+#: article-sections.php:58
+msgid "Insert into section"
+msgstr "Lisää osioon"
+
+#: article-sections.php:59
+msgid "Uploaded to this section"
+msgstr "Lähetä tähän osioon"
+
+#: article-sections.php:60
+msgid "Sections list"
+msgstr "Osioiden lista"
+
+#: article-sections.php:61
+msgid "Sections list navigation"
+msgstr "Osioiden listan navigointi"
+
+#: article-sections.php:62
+msgid "Filter sections list"
+msgstr "Suodata osioita"
+
+#: article-sections.php:66 article-sections.php:100
+msgid "Article section"
+msgstr "Osio"
+
+#: article-sections.php:101
+msgid "An article section."
+msgstr "Osio."
