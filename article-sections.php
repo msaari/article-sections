@@ -9,7 +9,7 @@
 
 /*
 Plugin Name: Article Sections
-Plugin URI: https://www.google.fi/
+Plugin URI: https://github.com/msaari/article-sections
 Description: Create and insert article sections by a different author.
 Author: Mikko Saari
 Version: 1.0
