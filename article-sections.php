@@ -4,7 +4,7 @@
  *
  * @package articlesections
  * @author Mikko Saari
- * @version 1.0
+ * @version 1.1
  */
 
 /*
@@ -12,13 +12,14 @@ Plugin Name: Article Sections
 Plugin URI: https://github.com/msaari/article-sections
 Description: Create and insert article sections by a different author.
 Author: Mikko Saari
-Version: 1.0
+Version: 1.1
 Author URI: https://www.mikkosaari.fi/
 */
 
 require_once 'acf-codifier.php';
 
-add_action( 'init', 'msaari_as_register_post_type', 0 );
+add_action( 'init', 'msaari_as_translations', 0 );
+add_action( 'init', 'msaari_as_register_post_type', 1 );
 add_action( 'acf/init', 'msaari_as_block_init' );
 add_action( 'pre_get_posts', 'msaari_as_post_types_author_archives' );
 add_action( 'wp_insert_post', 'msaari_as_link_posts', 99, 2 );
@@ -82,6 +83,15 @@ function msaari_as_register_post_type() {
 		'show_in_rest'        => true,
 	);
 	register_post_type( 'ms_article_section', $args );
+}
+
+/**
+ * Loads the translations.
+ *
+ * @return void
+ */
+function msaari_as_translations() {
+	load_plugin_textdomain( 'ms_article_section', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 }
 
 /**
@@ -158,12 +168,14 @@ function msaari_as_render_callback( array $block ) {
 		$class .= ' align' . $block['align'];
 	}
 
+	$class = apply_filters( 'msaari_as_section_class', $class );
+
 	?>
-	<div id="<?php echo esc_attr( $id ); ?>" class="<?php echo esc_attr( $class ); ?>">
+		<section id="<?php echo esc_attr( $id ); ?>" class="<?php echo esc_attr( $class ); ?>">
 		<?php echo $title; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 		<?php echo $byline; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-		<?php echo $post->post_content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-	</div>
+		<?php echo do_blocks( $post->post_content ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		</section>
 	<?php
 }
 
