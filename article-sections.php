@@ -4,7 +4,7 @@
  *
  * @package articlesections
  * @author Mikko Saari
- * @version 1.1
+ * @version 1.1.1
  */
 
 /*
@@ -12,7 +12,7 @@ Plugin Name: Article Sections
 Plugin URI: https://github.com/msaari/article-sections
 Description: Create and insert article sections by a different author.
 Author: Mikko Saari
-Version: 1.1
+Version: 1.1.1
 Author URI: https://www.mikkosaari.fi/
 */
 
@@ -155,7 +155,10 @@ function msaari_as_render_callback( array $block ) {
 		$byline .= '</span>';
 	}
 
-	$id = 'section-' . sanitize_title( $post->post_title );
+	$id_title = isset( $post->post_title )
+		? sanitize_title( $post->post_title )
+		: bin2hex( random_bytes( 2 ) );
+	$id       = 'section-' . $id_title;
 	if ( ! empty( $block['anchor'] ) ) {
 		$id = $block['anchor'];
 	}
@@ -170,11 +173,15 @@ function msaari_as_render_callback( array $block ) {
 
 	$class = apply_filters( 'msaari_as_section_class', $class );
 
+	$content = isset( $post->post_content )
+		? do_blocks( $post->post_content )
+		: '';
+
 	?>
 		<section id="<?php echo esc_attr( $id ); ?>" class="<?php echo esc_attr( $class ); ?>">
 		<?php echo $title; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 		<?php echo $byline; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-		<?php echo do_blocks( $post->post_content ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php echo $content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 		</section>
 	<?php
 }

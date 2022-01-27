@@ -30,5 +30,7 @@ The parent post is set as the `post_parent` for the section. This assumes each s
 If you are using [Relevanssi](https://wordpress.org/plugins/relevanssi/), the contents of the sections will be automatically indexed for the parent post. Do not set Relevanssi to index the section post type directly.
 
 ## Version history
-* 1.1 – Bug fixing, changes the display from a div to a section.
-* 1.0 – Initial release.
+
+- 1.1.1 – Fixes PHP errors in AJAX response.
+- 1.1 – Bug fixing, changes the display from a div to a section.
+- 1.0 – Initial release.
