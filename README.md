@@ -37,6 +37,7 @@ If you are using [Relevanssi](https://wordpress.org/plugins/relevanssi/), the co
 
 ## Version history
 
+- 1.1.3 – Correct fix for the thumbnail loop, fixed parent post matching.
 - 1.1.2 – Removes an infinite loop caused by a thumbnail filter.
 - 1.1.1 – Fixes PHP errors in AJAX response.
 - 1.1 – Bug fixing, changes the display from a div to a section.
