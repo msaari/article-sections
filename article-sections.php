@@ -4,7 +4,7 @@
  *
  * @package articlesections
  * @author Mikko Saari
- * @version 1.1.1
+ * @version 1.1.2
  */
 
 /*
@@ -12,7 +12,7 @@ Plugin Name: Article Sections
 Plugin URI: https://github.com/msaari/article-sections
 Description: Create and insert article sections by a different author.
 Author: Mikko Saari
-Version: 1.1.1
+Version: 1.1.2
 Author URI: https://www.mikkosaari.fi/
 */
 
@@ -230,6 +230,7 @@ function msaari_as_permalink( string $permalink, WP_Post $post ) : string {
 function msaari_as_thumbnail( string $thumbnail, int $post_id, int $thumb_id, $size, $attr ) : string {
 	$_post = get_post( $post_id );
 	if ( 'ms_article_section' === $_post->post_type ) {
+		remove_filter( 'post_thumbnail_html', 'msaari_as_thumbnail', 10 );
 		return get_the_post_thumbnail( $_post->post_parent, $size, $attr );
 	}
 	return $thumbnail;
