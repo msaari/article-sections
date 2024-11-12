@@ -27,6 +27,7 @@ add_filter( 'post_thumbnail_html', 'msaari_as_thumbnail', 10, 5 );
 add_filter( 'post_type_link', 'msaari_as_permalink', 10, 2 );
 add_filter( 'get_the_excerpt', 'msaari_as_excerpt', 10, 2 );
 add_filter( 'relevanssi_hits_filter', 'msaari_as_remove_duplicates' );
+add_filter( 'has_post_thumbnail', 'msaari_as_has_post_thumbnail', 10, 3 );
 
 /**
  * Registers the article section post type.
@@ -314,4 +315,28 @@ function msaari_as_remove_duplicates( $hits ) {
 	}
 	$hits[0] = $unique_posts;
 	return $hits;
+}
+
+/**
+ * Fixes has_post_thumbnail() to pass the request to the parent post.
+ * 
+ * @param bool        $has_thumbnail Does the post have a thumbnail?
+ * @param WP_Post|int $post          Post object or post ID.
+ * @param int         $thumbnail_id  The thumbnail ID.
+ * 
+ * @return bool.
+ */ 
+function msaari_as_has_post_thumbnail( $has_thumbnail, $post, $thumbnail_id ) {
+	if ( is_numeric( $post ) ) {
+		$_post = get_post( $post );
+	} else {
+		$_post = $post;
+	}
+	if ( 'ms_article_section' === $_post->post_type ) {
+		remove_filter( 'has_post_thumbnail', 'msaari_as_has_post_thumbnail', 10 );
+		$parent    = get_post_parent( $_post );
+		$thumbnail = has_post_thumbnail( $has_thumbnail, $parent, $thumbnail_id );
+		add_filter( 'has_post_thumbnail', 'msaari_as_has_post_thumbnail', 10, 3 );
+	}
+	return $thumbnail;
 }
