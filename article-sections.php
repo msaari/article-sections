@@ -232,7 +232,7 @@ function msaari_as_thumbnail( string $thumbnail, int $post_id, int $thumb_id, $s
 	$_post = get_post( $post_id );
 	if ( 'ms_article_section' === $_post->post_type ) {
 		remove_filter( 'post_thumbnail_html', 'msaari_as_thumbnail', 10 );
-		$thumb = get_the_post_thumbnail( $_post->post_parent, $size, $attr );
+		$thumbnail = get_the_post_thumbnail( $_post->post_parent, $size, $attr );
 		add_filter( 'post_thumbnail_html', 'msaari_as_thumbnail', 10, 5 );
 	}
 	return $thumbnail;
