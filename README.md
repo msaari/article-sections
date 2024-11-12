@@ -33,10 +33,11 @@ The featured image also uses the parent post featured image.
 
 The parent post is set as the `post_parent` for the section. This assumes each section is only used in one post. In case the section appears in multiple posts, the links will point to the parent post that has been saved last.
 
-If you are using [Relevanssi](https://wordpress.org/plugins/relevanssi/), the contents of the sections will be automatically indexed for the parent post. Do not set Relevanssi to index the section post type directly.
+If you are using [Relevanssi](https://wordpress.org/plugins/relevanssi/), the contents of the sections will be automatically indexed for the parent post. Do not set Relevanssi to index the section post type directly. However, if you want phrase matching to find sections, have Relevanssi index the sections. The results will be processed so that duplicate results are not returned.
 
 ## Version history
 
+- 1.1.4 – Search result deduplication.
 - 1.1.3 – Correct fix for the thumbnail loop, fixed parent post matching.
 - 1.1.2 – Removes an infinite loop caused by a thumbnail filter.
 - 1.1.1 – Fixes PHP errors in AJAX response.

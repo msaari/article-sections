@@ -4,7 +4,7 @@
  *
  * @package articlesections
  * @author Mikko Saari
- * @version 1.1.3
+ * @version 1.1.4
  */
 
 /*
@@ -12,7 +12,7 @@ Plugin Name: Article Sections
 Plugin URI: https://github.com/msaari/article-sections
 Description: Create and insert article sections by a different author.
 Author: Mikko Saari
-Version: 1.1.3
+Version: 1.1.4
 Author URI: https://www.mikkosaari.fi/
 */
 
@@ -26,6 +26,7 @@ add_action( 'wp_insert_post', 'msaari_as_link_posts', 99, 2 );
 add_filter( 'post_thumbnail_html', 'msaari_as_thumbnail', 10, 5 );
 add_filter( 'post_type_link', 'msaari_as_permalink', 10, 2 );
 add_filter( 'get_the_excerpt', 'msaari_as_excerpt', 10, 2 );
+add_filter( 'relevanssi_hits_filter', 'msaari_as_remove_duplicates' );
 
 /**
  * Registers the article section post type.
@@ -281,4 +282,36 @@ function msaari_as_excerpt( string $post_excerpt, WP_Post $post ) : string {
 	}
 
 	return wp_trim_words( preg_replace( '#<h.*</h.>#', '', $post->post_content ), 20, '&hellip;' );
+}
+
+/**
+ * Removes duplicates from Relevanssi search results if article sections are
+ * included in the search.
+ * 
+ * @param  array $hits Array of post objects in $hits[0], search query in
+ * $hits[1].
+ * @return array The hits array without duplicates.
+ */
+function msaari_as_remove_duplicates( $hits ) {
+	$seen_posts   = array();
+	$unique_posts = array();
+	foreach ( $hits[0] as $hit ) {
+		$post_id   = is_numeric( $hit ) ? $hit : $hit->ID;
+		$post_type = relevanssi_get_post_type( $post_id );
+
+		if ( 'ms_article_section' === $post_type ) {
+			$post_parent = get_post_parent( $post_id );
+			if ( $post_parent && isset( $post_parent->ID ) ) {
+				$post_id = $post_parent->ID;
+			}
+		}
+
+		if ( isset( $seen_posts[ $post_id ] ) ) {
+			continue;
+		}
+		$seen_posts[ $post_id ] = true;
+		$unique_posts[]         = $hit;
+	}
+	$hits[0] = $unique_posts;
+	return $hits;
 }
