@@ -4,7 +4,7 @@
  *
  * @package articlesections
  * @author Mikko Saari
- * @version 1.1.4
+ * @version 1.1.5
  */
 
 /*
@@ -12,7 +12,7 @@ Plugin Name: Article Sections
 Plugin URI: https://github.com/msaari/article-sections
 Description: Create and insert article sections by a different author.
 Author: Mikko Saari
-Version: 1.1.4
+Version: 1.1.5
 Author URI: https://www.mikkosaari.fi/
 */
 
@@ -317,15 +317,6 @@ function msaari_as_remove_duplicates( $hits ) {
 	return $hits;
 }
 
-/**
- * Fixes has_post_thumbnail() to pass the request to the parent post.
- * 
- * @param bool        $has_thumbnail Does the post have a thumbnail?
- * @param WP_Post|int $post          Post object or post ID.
- * @param int         $thumbnail_id  The thumbnail ID.
- * 
- * @return bool.
- */ 
 function msaari_as_has_post_thumbnail( $has_thumbnail, $post, $thumbnail_id ) {
 	if ( is_numeric( $post ) ) {
 		$_post = get_post( $post );
@@ -334,9 +325,9 @@ function msaari_as_has_post_thumbnail( $has_thumbnail, $post, $thumbnail_id ) {
 	}
 	if ( 'ms_article_section' === $_post->post_type ) {
 		remove_filter( 'has_post_thumbnail', 'msaari_as_has_post_thumbnail', 10 );
-		$parent    = get_post_parent( $_post );
-		$thumbnail = has_post_thumbnail( $has_thumbnail, $parent, $thumbnail_id );
+		$parent        = get_post_parent( $_post );
+		$has_thumbnail = has_post_thumbnail( $has_thumbnail, $parent, $thumbnail_id );
 		add_filter( 'has_post_thumbnail', 'msaari_as_has_post_thumbnail', 10, 3 );
 	}
-	return $thumbnail;
+	return $has_thumbnail;
 }

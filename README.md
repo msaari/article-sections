@@ -37,6 +37,7 @@ If you are using [Relevanssi](https://wordpress.org/plugins/relevanssi/), the co
 
 ## Version history
 
+- 1.1.5 - Fix a bug with thumbnails.
 - 1.1.4 – Search result deduplication and better thumbnail support.
 - 1.1.3 – Correct fix for the thumbnail loop, fixed parent post matching.
 - 1.1.2 – Removes an infinite loop caused by a thumbnail filter.
